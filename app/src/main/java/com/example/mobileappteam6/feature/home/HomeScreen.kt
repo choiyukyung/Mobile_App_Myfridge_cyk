@@ -2,11 +2,9 @@ package com.example.mobileappteam6.feature.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -53,6 +51,15 @@ fun HomeScreen(navController: NavController) {
             }
         ) {
             Text("register essentials")
+        }
+        Button(
+            onClick = {
+                navController.navigate("essentialsList") {
+                    popUpTo("home") { inclusive = true }
+                }
+            }
+        ) {
+            Text("essentials list")
         }
     }
 }

@@ -32,7 +32,9 @@ class EssentialsViewModel @Inject constructor() : ViewModel()  {
     }
 
     fun listenForEssentials(userEmail: String) {
-        firebaseDatabase.reference.child("essentials").orderByChild("id")
+        firebaseDatabase.reference.child("essentials")
+            .orderByChild("userEmail")
+            .equalTo(userEmail)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val list = mutableListOf<Essentials>()
@@ -48,4 +50,5 @@ class EssentialsViewModel @Inject constructor() : ViewModel()  {
                 override fun onCancelled(error: DatabaseError) {}
             })
     }
+
 }
