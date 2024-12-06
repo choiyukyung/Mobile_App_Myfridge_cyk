@@ -2,14 +2,18 @@ package com.example.mobileappteam6.feature.auth.signup
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -27,11 +31,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.mobileappteam6.R
+import com.example.mobileappteam6.ui.theme.MintBlue
+import com.example.mobileappteam6.ui.theme.MintWhite
 
 @Composable
 fun SignUpScreen(navController: NavController) {
@@ -53,13 +62,14 @@ fun SignUpScreen(navController: NavController) {
 
     val context = LocalContext.current
     LaunchedEffect(key1 = uiState.value) {
-        when(uiState.value) {
+        when (uiState.value) {
             is SignUpState.Success -> {
                 navController.navigate("home") {
                     popUpTo("login") { inclusive = true }
                     popUpTo("signup") { inclusive = true }
                 }
             }
+
             is SignUpState.Error -> {
                 Toast.makeText(context, "Sign Up Failed", Toast.LENGTH_SHORT).show()
             }
@@ -68,63 +78,97 @@ fun SignUpScreen(navController: NavController) {
         }
     }
 
-    Scaffold(modifier = Modifier.fillMaxSize()) {
-        Column (modifier = Modifier
-            .fillMaxSize()
-            .padding(it)
-            .padding(16.dp),
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        containerColor = MintBlue
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
+                .padding(16.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
-        ){
-            Image(
-                painter = painterResource(id = R.drawable.chatimage),
-                contentDescription = null,
-                modifier = Modifier.size(200.dp)
-            )
-            Spacer(modifier = Modifier.size(32.dp))
-            OutlinedTextField(
-                value = name,
-                onValueChange = { name = it },
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text(text = "Name") }
-            )
-            Spacer(modifier = Modifier.size(8.dp))
-            OutlinedTextField(
-                    value = email,
-            onValueChange = { email = it },
-            modifier = Modifier.fillMaxWidth(),
-            label = { Text(text = "Email") }
-            )
-            Spacer(modifier = Modifier.size(8.dp))
-            OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text(text = "Password") },
-                visualTransformation = PasswordVisualTransformation()
-            )
-            Spacer(modifier = Modifier.size(8.dp))
-            OutlinedTextField(
-                value = confirm,
-                onValueChange = { confirm = it },
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text(text = "Confirm Password") },
-                visualTransformation = PasswordVisualTransformation(),
-                isError = password.isNotEmpty() && confirm.isNotEmpty() && confirm != password
-            )
-            Spacer(modifier = Modifier.size(16.dp))
-            if (uiState.value == SignUpState.Loading) {
-                CircularProgressIndicator()
-            } else {
-                Button(
-                    onClick = { viewModel.signUp(name, email, password) },
-                    modifier = Modifier.fillMaxWidth(),
-                    enabled = name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && confirm.isNotEmpty() && confirm == password
+        ) {
+            Column(
+                modifier = Modifier
+                    .background(color = MintWhite, shape = RoundedCornerShape(size = 50.dp))
+                    .padding(start = 21.dp, top = 72.dp, end = 21.dp, bottom = 72.dp),
+                verticalArrangement = Arrangement.SpaceBetween,
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(
+                        16.dp,
+                        Alignment.CenterHorizontally
+                    ),
+                    verticalAlignment = Alignment.Bottom,
                 ) {
-                    Text(text = stringResource(id = R.string.signup))
+
+                    Text(
+                        text = "SIGNUP",
+                        style = TextStyle(
+                            fontSize = 40.sp,
+                            lineHeight = 40.sp,
+                            fontWeight = FontWeight(400),
+                            color = MintBlue,
+                        )
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.simple),
+                        contentDescription = null,
+                        modifier = Modifier.size(72.dp)
+                    )
                 }
-                TextButton(onClick = {  }) {
-                    Text(text = stringResource(id = R.string.signuptext))
+                Spacer(modifier = Modifier.size(32.dp))
+                OutlinedTextField(
+                    value = name,
+                    onValueChange = { name = it },
+                    modifier = Modifier.fillMaxWidth(),
+                    label = { Text(text = "Name") }
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+                OutlinedTextField(
+                    value = email,
+                    onValueChange = { email = it },
+                    modifier = Modifier.fillMaxWidth(),
+                    label = { Text(text = "Email") }
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+                OutlinedTextField(
+                    value = password,
+                    onValueChange = { password = it },
+                    modifier = Modifier.fillMaxWidth(),
+                    label = { Text(text = "Password") },
+                    visualTransformation = PasswordVisualTransformation()
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+                OutlinedTextField(
+                    value = confirm,
+                    onValueChange = { confirm = it },
+                    modifier = Modifier.fillMaxWidth(),
+                    label = { Text(text = "Confirm Password") },
+                    visualTransformation = PasswordVisualTransformation(),
+                    isError = password.isNotEmpty() && confirm.isNotEmpty() && confirm != password
+                )
+                Spacer(modifier = Modifier.size(16.dp))
+                if (uiState.value == SignUpState.Loading) {
+                    CircularProgressIndicator()
+                } else {
+                    Button(
+                        onClick = { viewModel.signUp(name, email, password) },
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MintBlue
+                        ),
+                        enabled = name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && confirm.isNotEmpty() && confirm == password
+                    ) {
+                        Text(text = stringResource(id = R.string.signup))
+                    }
+                    TextButton(onClick = { }) {
+                        Text(text = stringResource(id = R.string.signuptext))
+                    }
+
                 }
             }
         }
