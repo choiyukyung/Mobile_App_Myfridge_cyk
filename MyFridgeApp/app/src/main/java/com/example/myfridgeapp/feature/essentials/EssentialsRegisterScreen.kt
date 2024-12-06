@@ -60,9 +60,9 @@ fun EssentialsRegisterScreen(navController: NavController) {
         viewModel.listenForEssentials(userEmail)
     }
 
-    var what by remember { mutableStateOf("") }
-    var where by remember { mutableStateOf("") }
-    var price by remember { mutableStateOf("") }
+    var ename by remember { mutableStateOf("") }
+    var eplace by remember { mutableStateOf("") }
+    var eprice by remember { mutableStateOf("") }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -135,8 +135,8 @@ fun EssentialsRegisterScreen(navController: NavController) {
                 }
                 Spacer(modifier = Modifier.size(32.dp))
                 OutlinedTextField(
-                    value = what,
-                    onValueChange = { what = it },
+                    value = ename,
+                    onValueChange = { ename = it },
                     modifier = Modifier.fillMaxWidth(),
                     label = { Text(text = "무슨 물건인가요?") },
                     colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -145,8 +145,8 @@ fun EssentialsRegisterScreen(navController: NavController) {
                 )
                 Spacer(modifier = Modifier.size(32.dp))
                 OutlinedTextField(
-                    value = where,
-                    onValueChange = { where = it },
+                    value = eplace,
+                    onValueChange = { eplace = it },
                     modifier = Modifier.fillMaxWidth(),
                     label = { Text(text = "업태가 어떻게 되나요?") },
                     colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -155,8 +155,8 @@ fun EssentialsRegisterScreen(navController: NavController) {
                 )
                 Spacer(modifier = Modifier.size(32.dp))
                 OutlinedTextField(
-                    value = price,
-                    onValueChange = { price = it },
+                    value = eprice,
+                    onValueChange = { eprice = it },
                     modifier = Modifier.fillMaxWidth(),
                     label = { Text(text = "가격이 얼마인가요?") },
                     colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -165,9 +165,9 @@ fun EssentialsRegisterScreen(navController: NavController) {
                 )
                 Spacer(modifier = Modifier.size(32.dp))
                 Button(
-                    onClick = { viewModel.addEssentials(userEmail, what, where, price) },
+                    onClick = { viewModel.addEssentials(userEmail, ename, eplace, eprice) },
                     modifier = Modifier.fillMaxWidth(),
-                    enabled = what.isNotEmpty() && where.isNotEmpty() && price.isNotEmpty()
+                    enabled = ename.isNotEmpty() && eplace.isNotEmpty() && eprice.isNotEmpty()
                 ) {
                     Text(text = stringResource(id = R.string.register))
                 }

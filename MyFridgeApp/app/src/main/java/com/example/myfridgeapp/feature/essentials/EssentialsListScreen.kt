@@ -53,8 +53,7 @@ fun EssentialsListScreen(navController: NavController) {
     }
 
     val essentialsList by viewModel.essentialsList.collectAsState(emptyList())
-
-    var searchQ by remember { mutableStateOf("") }
+    var searchWhat by remember { mutableStateOf("") }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -97,8 +96,8 @@ fun EssentialsListScreen(navController: NavController) {
                 .padding(16.dp)
         ) {
             OutlinedTextField(
-                value = searchQ,
-                onValueChange = { searchQ = it },
+                value = searchWhat,
+                onValueChange = { searchWhat = it },
                 modifier = Modifier.fillMaxWidth(),
                 label = { Text(text = "Search") },
                 colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -107,8 +106,13 @@ fun EssentialsListScreen(navController: NavController) {
             )
             Spacer(modifier = Modifier.size(32.dp))
 
+            val filteredList = if (searchWhat.isEmpty()) {
+                essentialsList
+            } else {
+                essentialsList.filter { it.ename.contains(searchWhat, ignoreCase = true) }
+            }
 
-            essentialsList.forEach { item ->
+            filteredList.forEach { item ->
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -120,7 +124,7 @@ fun EssentialsListScreen(navController: NavController) {
                         },
                 ) {
                     Text(
-                        text = item.what,
+                        text = item.ename,
                         modifier = Modifier
                             .padding(16.dp)
                             .align(Alignment.Center)
