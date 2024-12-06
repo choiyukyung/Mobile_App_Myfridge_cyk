@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.mobileappteam6.feature.auth.signin.SignInScreen
 import com.example.mobileappteam6.feature.auth.signup.SignUpScreen
+import com.example.mobileappteam6.feature.essentials.EssentialsRegisterScreen
 import com.example.mobileappteam6.feature.home.HomeScreen
 import com.google.firebase.auth.FirebaseAuth
 
@@ -29,6 +30,10 @@ fun MainApp() {
             }
             composable(route = "home") {
                 HomeScreen(navController = navController)
+            }
+
+            composable(route = "essentialsRegister") {
+                EssentialsRegisterScreen(navController = navController)
             }
         }
     }
