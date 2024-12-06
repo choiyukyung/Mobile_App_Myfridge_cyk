@@ -120,7 +120,7 @@ fun EssentialsListScreen(navController: NavController) {
                         .background(MintWhite)
                         .clip(RoundedCornerShape(8.dp))
                         .clickable {
-                            println("$item clicked")
+                            navController.navigate("essentialsSingle?value=" + item.id)
                         },
                 ) {
                     Text(
