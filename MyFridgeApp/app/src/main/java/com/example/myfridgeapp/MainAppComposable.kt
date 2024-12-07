@@ -12,6 +12,7 @@ import com.example.myfridgeapp.feature.auth.signup.SignUpScreen
 import com.example.myfridgeapp.feature.essentials.EssentialsListScreen
 import com.example.myfridgeapp.feature.essentials.EssentialsRegisterScreen
 import com.example.myfridgeapp.feature.essentials.EssentialsSingleScreen
+import com.example.myfridgeapp.feature.food.FoodListScreen
 import com.example.myfridgeapp.feature.home.AddNewItemScreen
 import com.example.myfridgeapp.feature.home.HomeScreen
 import com.google.firebase.auth.FirebaseAuth
@@ -35,6 +36,10 @@ fun MainApp() {
                 HomeScreen(navController = navController)
             }
 
+            composable(route = "addNewItem") {
+                AddNewItemScreen(navController = navController)
+            }
+
             composable(route = "essentialsRegister") {
                 EssentialsRegisterScreen(navController = navController)
             }
@@ -47,8 +52,9 @@ fun MainApp() {
                     EssentialsSingleScreen(navController = navController, itemId = value)
                 }
             }
-            composable(route = "addNewItem") {
-                AddNewItemScreen(navController = navController)
+
+            composable(route = "foodList") {
+                FoodListScreen(navController = navController)
             }
         }
     }
