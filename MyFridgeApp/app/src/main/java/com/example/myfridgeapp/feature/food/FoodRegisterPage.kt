@@ -3,28 +3,28 @@ package com.example.myfridgeapp.feature.food
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -39,10 +39,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.myfridgeapp.R
@@ -76,9 +74,11 @@ fun FoodRegisterScreen(navController: NavController) {
                 Toast.makeText(context, "Register Success", Toast.LENGTH_SHORT).show()
                 navController.navigate("foodRegister")
             }
+
             is FoodState.Error -> {
                 Toast.makeText(context, "Register Failed", Toast.LENGTH_SHORT).show()
             }
+
             else -> {}
         }
     }
@@ -101,13 +101,13 @@ fun FoodRegisterScreen(navController: NavController) {
                 },
                 title = {
                     Text(
-                        text = stringResource(id = R.string.fList),
+                        text = stringResource(id = R.string.fRegister),
                         color = fontMint,
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold
                     )
-
-                }
+                },
+                colors = topAppBarColors(MintWhite)
 
             )
         }
@@ -116,94 +116,104 @@ fun FoodRegisterScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
-                .padding(16.dp),
+                .padding(horizontal = 16.dp, vertical = 48.dp)
+                .background(color = Color.White, shape = RoundedCornerShape(size = 50.dp)),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
-            Column(
-                verticalArrangement = Arrangement.SpaceBetween,
-                horizontalAlignment = Alignment.CenterHorizontally,
+            Spacer(modifier = Modifier.size(24.dp))
+            Image(
+                painter = painterResource(id = R.drawable.register_in_fridge),
+                contentDescription = null,
                 modifier = Modifier
-                    .background(color = Color.White, shape = RoundedCornerShape(size = 50.dp))
-                    .padding(start = 20.dp, top = 50.dp, end = 20.dp, bottom = 50.dp)
-            ) {
+                    .fillMaxWidth()
+                    .height(100.dp)
+            )
+            Spacer(modifier = Modifier.size(48.dp))
 
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.End),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.logo_fridge),
-                        contentDescription = "image description",
-                        modifier = Modifier.size(100.dp)
-                    )
-                    Text(
-                        text = stringResource(id = R.string.keepInFridge),
-                        style = TextStyle(
-                            fontSize = 36.sp,
-                            color = fontMint,
-                            fontWeight = FontWeight.Bold,
-                        )
-                    )
-                }
-                Spacer(modifier = Modifier.size(32.dp))
-                OutlinedTextField(
-                    value = fname,
-                    onValueChange = { fname = it },
-                    modifier = Modifier.fillMaxWidth(),
-                    label = { Text(text = stringResource(id = R.string.whatsName)) },
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        containerColor = MintWhite
-                    )
+            TextField(
+                value = fname,
+                onValueChange = { fname = it },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .clip(RoundedCornerShape(20.dp)),
+                label = { Text(text = stringResource(id = R.string.whatsName)) },
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    containerColor = MintWhite,
+                    disabledBorderColor = Color.Transparent,
+                    focusedBorderColor = Color.Transparent,
+                    unfocusedBorderColor = Color.Transparent,
+                    unfocusedLabelColor = fontMint,
+                    focusedLabelColor = fontMint
                 )
-                Spacer(modifier = Modifier.size(32.dp))
-                OutlinedTextField(
-                    value = expDate,
-                    onValueChange = { expDate = it },
-                    modifier = Modifier.fillMaxWidth(),
-                    label = { Text(text = stringResource(id = R.string.checkExpDate)) },
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        containerColor = MintWhite
-                    )
+            )
+            Spacer(modifier = Modifier.size(32.dp))
+            TextField(
+                value = expDate,
+                onValueChange = { expDate = it },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .clip(RoundedCornerShape(20.dp)),
+                label = { Text(text = stringResource(id = R.string.checkExpDate)) },
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    containerColor = MintWhite,
+                    disabledBorderColor = Color.Transparent,
+                    focusedBorderColor = Color.Transparent,
+                    unfocusedBorderColor = Color.Transparent,
+                    unfocusedLabelColor = fontMint,
+                    focusedLabelColor = fontMint
                 )
-                Spacer(modifier = Modifier.size(32.dp))
-                OutlinedTextField(
-                    value = fplace,
-                    onValueChange = { fplace = it },
-                    modifier = Modifier.fillMaxWidth(),
-                    label = { Text(text = stringResource(id = R.string.wheresPlace)) },
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        containerColor = MintWhite
-                    )
+            )
+            Spacer(modifier = Modifier.size(32.dp))
+            TextField(
+                value = fplace,
+                onValueChange = { fplace = it },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .clip(RoundedCornerShape(20.dp)),
+                label = { Text(text = stringResource(id = R.string.wheresPlace)) },
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    containerColor = MintWhite,
+                    disabledBorderColor = Color.Transparent,
+                    focusedBorderColor = Color.Transparent,
+                    unfocusedBorderColor = Color.Transparent,
+                    unfocusedLabelColor = fontMint,
+                    focusedLabelColor = fontMint
                 )
-                Spacer(modifier = Modifier.size(32.dp))
-                OutlinedTextField(
-                    value = fprice,
-                    onValueChange = { fprice = it },
-                    modifier = Modifier.fillMaxWidth(),
-                    label = { Text(text = stringResource(id = R.string.howsPrice)) },
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        containerColor = MintWhite
-                    )
+            )
+            Spacer(modifier = Modifier.size(32.dp))
+            TextField(
+                value = fprice,
+                onValueChange = { fprice = it },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .clip(RoundedCornerShape(20.dp)),
+                label = { Text(text = stringResource(id = R.string.howsPrice)) },
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    containerColor = MintWhite,
+                    disabledBorderColor = Color.Transparent,
+                    focusedBorderColor = Color.Transparent,
+                    unfocusedBorderColor = Color.Transparent,
+                    unfocusedLabelColor = fontMint,
+                    focusedLabelColor = fontMint
                 )
-                Spacer(modifier = Modifier.size(32.dp))
-                Button(
-                    onClick = {
+            )
+            Spacer(modifier = Modifier.size(32.dp))
+            Image(
+                painter = painterResource(id = R.drawable.button_register),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(120.dp)
+                    .padding(horizontal = 16.dp)
+                    .clickable {
                         viewModel.addFood(userEmail, fname, expDate, fplace, fprice)
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.buttonColors(MintBlue),
-                    enabled = fname.isNotEmpty() && expDate.isNotEmpty() && fplace.isNotEmpty() && fprice.isNotEmpty()
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.register),
-                        color = Color.White
-                    )
-                }
-
-
-            }
+                    }
+            )
 
         }
     }
