@@ -1,4 +1,4 @@
-package com.example.myfridgeapp.feature.essentials
+package com.example.myfridgeapp.feature.food
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -53,29 +53,30 @@ import com.google.firebase.auth.FirebaseAuth
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EssentialsRegisterScreen(navController: NavController) {
+fun FoodRegisterScreen(navController: NavController) {
     val currentUser = FirebaseAuth.getInstance().currentUser
     val userEmail = currentUser?.email ?: ""
 
-    val viewModel: EssentialsViewModel = hiltViewModel()
+    val viewModel: FoodViewModel = hiltViewModel()
     LaunchedEffect(key1 = true) {
-        viewModel.listenForEssentials(userEmail)
+        viewModel.listenForFood(userEmail)
     }
 
-    var ename by remember { mutableStateOf("") }
-    var eplace by remember { mutableStateOf("") }
-    var eprice by remember { mutableStateOf("") }
+    var fname by remember { mutableStateOf("") }
+    var expDate by remember { mutableStateOf("") }
+    var fplace by remember { mutableStateOf("") }
+    var fprice by remember { mutableStateOf("") }
 
     //success/fail message
     val uiState = viewModel.state.collectAsState()
     val context = LocalContext.current
     LaunchedEffect(key1 = uiState.value) {
         when (uiState.value) {
-            is EssentialsState.Success -> {
+            is FoodState.Success -> {
                 Toast.makeText(context, "Register Success", Toast.LENGTH_SHORT).show()
-                navController.navigate("essentialsRegister")
+                navController.navigate("foodRegister")
             }
-            is EssentialsState.Error -> {
+            is FoodState.Error -> {
                 Toast.makeText(context, "Register Failed", Toast.LENGTH_SHORT).show()
             }
             else -> {}
@@ -100,7 +101,7 @@ fun EssentialsRegisterScreen(navController: NavController) {
                 },
                 title = {
                     Text(
-                        text = stringResource(id = R.string.eRegister),
+                        text = stringResource(id = R.string.fList),
                         color = fontMint,
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold
@@ -138,7 +139,7 @@ fun EssentialsRegisterScreen(navController: NavController) {
                         modifier = Modifier.size(100.dp)
                     )
                     Text(
-                        text = stringResource(id = R.string.keepInCupboard),
+                        text = stringResource(id = R.string.keepInFridge),
                         style = TextStyle(
                             fontSize = 36.sp,
                             color = fontMint,
@@ -148,8 +149,8 @@ fun EssentialsRegisterScreen(navController: NavController) {
                 }
                 Spacer(modifier = Modifier.size(32.dp))
                 OutlinedTextField(
-                    value = ename,
-                    onValueChange = { ename = it },
+                    value = fname,
+                    onValueChange = { fname = it },
                     modifier = Modifier.fillMaxWidth(),
                     label = { Text(text = stringResource(id = R.string.whatsName)) },
                     colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -158,8 +159,18 @@ fun EssentialsRegisterScreen(navController: NavController) {
                 )
                 Spacer(modifier = Modifier.size(32.dp))
                 OutlinedTextField(
-                    value = eplace,
-                    onValueChange = { eplace = it },
+                    value = expDate,
+                    onValueChange = { expDate = it },
+                    modifier = Modifier.fillMaxWidth(),
+                    label = { Text(text = stringResource(id = R.string.checkExpDate)) },
+                    colors = TextFieldDefaults.outlinedTextFieldColors(
+                        containerColor = MintWhite
+                    )
+                )
+                Spacer(modifier = Modifier.size(32.dp))
+                OutlinedTextField(
+                    value = fplace,
+                    onValueChange = { fplace = it },
                     modifier = Modifier.fillMaxWidth(),
                     label = { Text(text = stringResource(id = R.string.wheresPlace)) },
                     colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -168,8 +179,8 @@ fun EssentialsRegisterScreen(navController: NavController) {
                 )
                 Spacer(modifier = Modifier.size(32.dp))
                 OutlinedTextField(
-                    value = eprice,
-                    onValueChange = { eprice = it },
+                    value = fprice,
+                    onValueChange = { fprice = it },
                     modifier = Modifier.fillMaxWidth(),
                     label = { Text(text = stringResource(id = R.string.howsPrice)) },
                     colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -179,11 +190,11 @@ fun EssentialsRegisterScreen(navController: NavController) {
                 Spacer(modifier = Modifier.size(32.dp))
                 Button(
                     onClick = {
-                        viewModel.addEssentials(userEmail, ename, eplace, eprice)
-                              },
+                        viewModel.addFood(userEmail, fname, expDate, fplace, fprice)
+                    },
                     modifier = Modifier.fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(MintBlue),
-                    enabled = ename.isNotEmpty() && eplace.isNotEmpty() && eprice.isNotEmpty()
+                    enabled = fname.isNotEmpty() && expDate.isNotEmpty() && fplace.isNotEmpty() && fprice.isNotEmpty()
                 ) {
                     Text(
                         text = stringResource(id = R.string.register),

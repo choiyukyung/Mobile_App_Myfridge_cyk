@@ -33,10 +33,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.myfridgeapp.R
 import com.example.myfridgeapp.ui.theme.MintBlue
 import com.example.myfridgeapp.ui.theme.MintWhite
 import com.google.firebase.auth.FirebaseAuth
@@ -81,7 +83,7 @@ fun FoodListScreen(navController: NavController) {
                 ),
                 title = {
                     Text(
-                        text = "생필품 리스트",
+                        text = stringResource(id = R.string.fList),
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold
                     )
