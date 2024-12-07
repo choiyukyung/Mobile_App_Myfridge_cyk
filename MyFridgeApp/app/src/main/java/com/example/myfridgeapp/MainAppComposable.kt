@@ -11,7 +11,6 @@ import com.example.myfridgeapp.feature.auth.signin.SignInScreen
 import com.example.myfridgeapp.feature.auth.signup.SignUpScreen
 import com.example.myfridgeapp.feature.essentials.EssentialsListScreen
 import com.example.myfridgeapp.feature.essentials.EssentialsRegisterScreen
-import com.example.myfridgeapp.feature.essentials.EssentialsSingleScreen
 import com.example.myfridgeapp.feature.food.FoodListScreen
 import com.example.myfridgeapp.feature.home.AddNewItemScreen
 import com.example.myfridgeapp.feature.home.HomeScreen
@@ -49,7 +48,7 @@ fun MainApp() {
             composable(route = "essentialsSingle?value={value}") { v ->
                 val value = v.arguments?.getString("value")
                 if (value != null) {
-                    EssentialsSingleScreen(navController = navController, itemId = value)
+                    //EssentialsSingleScreen(navController = navController, itemId = value)
                 }
             }
 
