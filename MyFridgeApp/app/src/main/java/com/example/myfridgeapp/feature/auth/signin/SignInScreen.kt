@@ -64,7 +64,6 @@ fun SignInScreen(navController: NavController) {
                     popUpTo("login") { inclusive = true }
                 }
             }
-
             is SignInState.Error -> {
                 Toast.makeText(context, "Sign In Failed", Toast.LENGTH_SHORT).show()
             }
@@ -110,7 +109,7 @@ fun SignInScreen(navController: NavController) {
                         )
                     )
                     Image(
-                        painter = painterResource(id = R.drawable.simple),
+                        painter = painterResource(id = R.drawable.logo_fridge),
                         contentDescription = null,
                         modifier = Modifier.size(72.dp)
                     )

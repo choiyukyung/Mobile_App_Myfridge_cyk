@@ -23,16 +23,25 @@ class EssentialsViewModel @Inject constructor() : ViewModel() {
     val essentialsOne = _essentialsOne.asStateFlow()
     private val firebaseDatabase = Firebase.database
 
+    private val _state = MutableStateFlow<EssentialsState>(EssentialsState.Nothing)
+    val state = _state.asStateFlow()
+
     fun addEssentials(userEmail: String, ename: String, eplace: String, eprice: String) {
         val essentials = Essentials(
-            id = firebaseDatabase.reference.child("essentials").push().key ?: UUID.randomUUID()
-                .toString(),
+            id = firebaseDatabase.reference.child("essentials").push().key ?: UUID.randomUUID().toString(),
             userEmail = userEmail,
             ename = ename,
             eplace = eplace,
             eprice = eprice
         )
         firebaseDatabase.reference.child("essentials").child(essentials.id).setValue(essentials)
+            .addOnCompleteListener { task ->
+                if(task.isSuccessful) {
+                    _state.value = EssentialsState.Success
+                } else {
+                    _state.value = EssentialsState.Error
+                }
+            }
     }
 
     fun listenForEssentials(userEmail: String) {
@@ -71,4 +80,11 @@ class EssentialsViewModel @Inject constructor() : ViewModel() {
 
     }
 
+}
+
+sealed class EssentialsState {
+    object Nothing: EssentialsState()
+    object Loading: EssentialsState()
+    object Success: EssentialsState()
+    object Error: EssentialsState()
 }

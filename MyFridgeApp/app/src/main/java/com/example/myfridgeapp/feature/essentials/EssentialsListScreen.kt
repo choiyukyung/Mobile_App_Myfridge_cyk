@@ -44,6 +44,9 @@ import com.google.firebase.auth.FirebaseAuth
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EssentialsListScreen(navController: NavController) {
+
+    // 스크롤 필요
+
     val currentUser = FirebaseAuth.getInstance().currentUser
     val userEmail = currentUser?.email ?: ""
 

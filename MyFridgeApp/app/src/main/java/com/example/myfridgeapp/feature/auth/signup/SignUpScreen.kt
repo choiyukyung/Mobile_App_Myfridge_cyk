@@ -115,7 +115,7 @@ fun SignUpScreen(navController: NavController) {
                         )
                     )
                     Image(
-                        painter = painterResource(id = R.drawable.simple),
+                        painter = painterResource(id = R.drawable.logo_fridge),
                         contentDescription = null,
                         modifier = Modifier.size(72.dp)
                     )
