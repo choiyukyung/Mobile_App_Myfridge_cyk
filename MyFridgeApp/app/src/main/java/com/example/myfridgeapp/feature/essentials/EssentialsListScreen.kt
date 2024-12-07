@@ -68,7 +68,7 @@ fun EssentialsListScreen(navController: NavController) {
                         )
                     ),
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigateUp() }) {
+                    IconButton(onClick = { navController.navigate("home") }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
