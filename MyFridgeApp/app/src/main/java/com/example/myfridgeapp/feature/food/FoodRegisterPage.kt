@@ -60,10 +60,10 @@ fun FoodRegisterScreen(navController: NavController) {
         viewModel.listenForFood(userEmail)
     }
 
-    var fname by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf("") }
     var expDate by remember { mutableStateOf("") }
-    var fplace by remember { mutableStateOf("") }
-    var fprice by remember { mutableStateOf("") }
+    var place by remember { mutableStateOf("") }
+    var price by remember { mutableStateOf("") }
 
     //success/fail message
     val uiState = viewModel.state.collectAsState()
@@ -132,8 +132,8 @@ fun FoodRegisterScreen(navController: NavController) {
             Spacer(modifier = Modifier.size(48.dp))
 
             TextField(
-                value = fname,
-                onValueChange = { fname = it },
+                value = name,
+                onValueChange = { name = it },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
@@ -168,8 +168,8 @@ fun FoodRegisterScreen(navController: NavController) {
             )
             Spacer(modifier = Modifier.size(32.dp))
             TextField(
-                value = fplace,
-                onValueChange = { fplace = it },
+                value = place,
+                onValueChange = { place = it },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
@@ -186,8 +186,8 @@ fun FoodRegisterScreen(navController: NavController) {
             )
             Spacer(modifier = Modifier.size(32.dp))
             TextField(
-                value = fprice,
-                onValueChange = { fprice = it },
+                value = price,
+                onValueChange = { price = it },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
@@ -211,7 +211,7 @@ fun FoodRegisterScreen(navController: NavController) {
                     .height(120.dp)
                     .padding(horizontal = 16.dp)
                     .clickable {
-                        viewModel.addFood(userEmail, fname, expDate, fplace, fprice)
+                        viewModel.addFood(userEmail, name, expDate, place, price)
                     }
             )
 

@@ -26,13 +26,13 @@ class EssentialsViewModel @Inject constructor() : ViewModel() {
     private val _state = MutableStateFlow<EssentialsState>(EssentialsState.Nothing)
     val state = _state.asStateFlow()
 
-    fun addEssentials(userEmail: String, ename: String, eplace: String, eprice: String) {
+    fun addEssentials(userEmail: String, name: String, place: String, price: String) {
         val essentials = Essentials(
             id = firebaseDatabase.reference.child("essentials").push().key ?: UUID.randomUUID().toString(),
             userEmail = userEmail,
-            ename = ename,
-            eplace = eplace,
-            eprice = eprice
+            name = name,
+            place = place,
+            price = price
         )
         firebaseDatabase.reference.child("essentials").child(essentials.id).setValue(essentials)
             .addOnCompleteListener { task ->

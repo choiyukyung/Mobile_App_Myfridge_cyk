@@ -60,9 +60,9 @@ fun EssentialsRegisterScreen(navController: NavController) {
         viewModel.listenForEssentials(userEmail)
     }
 
-    var ename by remember { mutableStateOf("") }
-    var eplace by remember { mutableStateOf("") }
-    var eprice by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf("") }
+    var place by remember { mutableStateOf("") }
+    var price by remember { mutableStateOf("") }
 
     //success/fail message
     val uiState = viewModel.state.collectAsState()
@@ -131,8 +131,8 @@ fun EssentialsRegisterScreen(navController: NavController) {
             Spacer(modifier = Modifier.size(64.dp))
 
             TextField(
-                value = ename,
-                onValueChange = { ename = it },
+                value = name,
+                onValueChange = { name = it },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
@@ -149,8 +149,8 @@ fun EssentialsRegisterScreen(navController: NavController) {
             )
             Spacer(modifier = Modifier.size(32.dp))
             TextField(
-                value = eplace,
-                onValueChange = { eplace = it },
+                value = place,
+                onValueChange = { place = it },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
@@ -167,8 +167,8 @@ fun EssentialsRegisterScreen(navController: NavController) {
             )
             Spacer(modifier = Modifier.size(32.dp))
             TextField(
-                value = eprice,
-                onValueChange = { eprice = it },
+                value = price,
+                onValueChange = { price = it },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
@@ -192,7 +192,7 @@ fun EssentialsRegisterScreen(navController: NavController) {
                     .height(120.dp)
                     .padding(horizontal = 16.dp)
                     .clickable {
-                        viewModel.addEssentials(userEmail, ename, eplace, eprice)
+                        viewModel.addEssentials(userEmail, name, place, price)
                     }
             )
 

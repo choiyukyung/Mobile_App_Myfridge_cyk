@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -73,7 +72,7 @@ fun FoodListScreen(navController: NavController) {
     val filteredList = if (searchWhat.isEmpty()) {
         foodList
     } else {
-        foodList.filter { it.fname.contains(searchWhat, ignoreCase = true) }
+        foodList.filter { it.name.contains(searchWhat, ignoreCase = true) }
     }
 
     var sortedFoodList by remember { mutableStateOf(emptyList<Food>()) }
@@ -173,7 +172,7 @@ fun FoodListScreen(navController: NavController) {
                                 modifier = Modifier.align(Alignment.CenterVertically)
                             ) {
                                 Text(
-                                    text = item.fname,
+                                    text = item.name,
                                     color = DeepGreen,
                                     fontWeight = FontWeight.Bold
                                 )
@@ -182,7 +181,7 @@ fun FoodListScreen(navController: NavController) {
                                     contentDescription = null
                                 )
                                 Text(
-                                    text = item.fprice + "원에 구매하셨습니다.",
+                                    text = item.price + "원에 구매하셨습니다.",
                                     color = DeepGreen
                                 )
                             }

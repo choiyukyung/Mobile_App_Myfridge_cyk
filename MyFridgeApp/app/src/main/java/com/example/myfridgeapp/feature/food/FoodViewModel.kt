@@ -26,14 +26,14 @@ class FoodViewModel @Inject constructor() : ViewModel() {
     private val _state = MutableStateFlow<FoodState>(FoodState.Nothing)
     val state = _state.asStateFlow()
 
-    fun addFood(userEmail: String, fname: String, expDate: String, fplace: String, fprice: String) {
+    fun addFood(userEmail: String, name: String, expDate: String, place: String, price: String) {
         val food = Food(
             id = firebaseDatabase.reference.child("food").push().key ?: UUID.randomUUID().toString(),
             userEmail = userEmail,
-            fname = fname,
+            name = name,
             expDate = expDate,
-            fplace = fplace,
-            fprice = fprice
+            place = place,
+            price = price
         )
 
         firebaseDatabase.reference.child("food").child(food.id).setValue(food)

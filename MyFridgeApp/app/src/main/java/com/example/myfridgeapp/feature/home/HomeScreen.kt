@@ -1,6 +1,5 @@
 package com.example.myfridgeapp.feature.home
 
-import android.annotation.SuppressLint
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -41,7 +40,6 @@ import androidx.navigation.NavController
 import com.example.myfridgeapp.R
 import com.example.myfridgeapp.ui.theme.MintWhite
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavController) {
