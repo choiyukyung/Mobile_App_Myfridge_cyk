@@ -32,7 +32,7 @@ fun CustomOutlinedTextField(
     onValueChange: (String) -> Unit,
     label: String,
     isPassword: Boolean = false,
-    iconId: Int
+    iconId: Int? = null
 ) {
     OutlinedTextField(
         value = value,
@@ -41,14 +41,16 @@ fun CustomOutlinedTextField(
             .fillMaxWidth()
             .clip(RoundedCornerShape(20.dp)),
         label = { Text(text = label) },
-        leadingIcon = {
-            Icon(
-                painter = painterResource(id = iconId),
-                contentDescription = null,
-                modifier = Modifier.size(24.dp),
-                tint = fontMint
-            )
-        },
+        leadingIcon = if (iconId != null) { // iconId가 null이 아닐 때만 leadingIcon을 추가
+            {
+                Icon(
+                    painter = painterResource(id = iconId),
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp),
+                    tint = fontMint
+                )
+            }
+        } else null,
         colors = TextFieldDefaults.outlinedTextFieldColors(
             containerColor = MintWhite,
             disabledBorderColor = Color.Transparent,

@@ -3,7 +3,6 @@ package com.example.myfridgeapp.feature.food
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -44,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.myfridgeapp.R
+import com.example.myfridgeapp.ui.CustomRegisterButton
 import com.example.myfridgeapp.ui.theme.MintBlue
 import com.example.myfridgeapp.ui.theme.MintWhite
 import com.example.myfridgeapp.ui.theme.fontMint
@@ -203,16 +203,10 @@ fun FoodRegisterScreen(navController: NavController) {
                 )
             )
             Spacer(modifier = Modifier.size(32.dp))
-            Image(
-                painter = painterResource(id = R.drawable.button_register),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(120.dp)
-                    .padding(horizontal = 16.dp)
-                    .clickable {
-                        viewModel.addFood(userEmail, name, expDate, place, price)
-                    }
+            CustomRegisterButton(
+                text = "등록하기",
+                onClick = { viewModel.addFood(userEmail, name, expDate, place, price) },
+                enabled = true,
             )
 
         }

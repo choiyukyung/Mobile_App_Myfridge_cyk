@@ -36,6 +36,7 @@ import com.example.myfridgeapp.ui.CustomOutlinedTextField
 import com.example.myfridgeapp.ui.CustomRegisterButton
 import com.example.myfridgeapp.ui.theme.MintBlue
 import com.example.myfridgeapp.ui.theme.MintWhiteLight
+import com.example.myfridgeapp.ui.theme.fontMint
 
 
 @Composable
@@ -110,7 +111,7 @@ fun SignInScreen(navController: NavController) {
                     CircularProgressIndicator()
                 } else {
                     CustomRegisterButton(
-                        text = "로그인하기",
+                        text = stringResource(id = R.string.signin),
                         onClick = { viewModel.signIn(email, password) },
                         enabled = email.isNotEmpty() && password.isNotEmpty(),
                     )
@@ -120,7 +121,7 @@ fun SignInScreen(navController: NavController) {
                     ) {
                         Text(
                             text = stringResource(id = R.string.signintext),
-                            color = MintBlue
+                            color = fontMint
                         )
                     }
                 }
