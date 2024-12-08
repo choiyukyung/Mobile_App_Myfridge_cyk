@@ -167,7 +167,10 @@ fun ButtonGroup(
                                 popUpTo("home") { inclusive = true }
                             }
 
-                            3 -> navController.navigate("page3")
+                            3 -> navController.navigate("shopList") {
+                                popUpTo("home") { inclusive = true }
+                            }
+
                             4 -> navController.navigate("page4")
                         }
                         onClick(null)

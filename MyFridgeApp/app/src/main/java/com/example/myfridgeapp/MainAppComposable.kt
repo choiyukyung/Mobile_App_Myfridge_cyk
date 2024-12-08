@@ -15,6 +15,7 @@ import com.example.myfridgeapp.feature.food.FoodListScreen
 import com.example.myfridgeapp.feature.food.FoodRegisterScreen
 import com.example.myfridgeapp.feature.home.AddNewItemScreen
 import com.example.myfridgeapp.feature.home.HomeScreen
+import com.example.myfridgeapp.feature.shop.ShopListScreen
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable
@@ -52,6 +53,10 @@ fun MainApp() {
             }
             composable(route = "foodList") {
                 FoodListScreen(navController = navController)
+            }
+
+            composable(route = "shopList") {
+                ShopListScreen(navController = navController)
             }
         }
     }
