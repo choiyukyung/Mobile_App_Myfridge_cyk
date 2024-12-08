@@ -38,7 +38,8 @@ fun CustomOutlinedTextField(
     onValueChange: (String) -> Unit,
     label: String,
     isPassword: Boolean = false,
-    iconId: Int? = null
+    iconId: Int? = null,
+    fieldColor: Color = MintWhite
 ) {
     OutlinedTextField(
         value = value,
@@ -58,7 +59,7 @@ fun CustomOutlinedTextField(
             }
         } else null,
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            containerColor = MintWhite,
+            containerColor = fieldColor,
             disabledBorderColor = Color.Transparent,
             focusedBorderColor = Color.Transparent,
             unfocusedBorderColor = Color.Transparent,
