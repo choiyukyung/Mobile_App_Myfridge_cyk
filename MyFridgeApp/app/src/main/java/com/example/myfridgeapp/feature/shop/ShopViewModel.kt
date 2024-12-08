@@ -23,12 +23,11 @@ class ShopViewModel @Inject constructor() : ViewModel() {
     private val _state = MutableStateFlow<ShopState>(ShopState.Nothing)
     val state = _state.asStateFlow()
 
-    fun addShop(userEmail: String, name: String, expDate: String, place: String, price: String, eorf: Boolean) {
+    fun addShop(userEmail: String, name: String, place: String, price: String, eorf: Boolean) {
         val shop = Shop(
             id = firebaseDatabase.reference.child("shop").push().key ?: UUID.randomUUID().toString(),
             userEmail = userEmail,
             name = name,
-            expDate = expDate,
             place = place,
             price = price,
 
@@ -63,6 +62,17 @@ class ShopViewModel @Inject constructor() : ViewModel() {
 
                 override fun onCancelled(error: DatabaseError) {}
             })
+    }
+
+    fun deleteShop(shopId: String) {
+        firebaseDatabase.reference.child("shop").child(shopId).removeValue()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    _state.value = ShopState.Success
+                } else {
+                    _state.value = ShopState.Error
+                }
+            }
     }
 
 }

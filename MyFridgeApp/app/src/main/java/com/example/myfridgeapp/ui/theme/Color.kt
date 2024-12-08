@@ -15,3 +15,7 @@ val MintWhite = Color(0xFFDDF9F8)
 val DeepGreen = Color(0xFF005A54)
 val fontMint = Color(0xFF00B4A9)
 val MintWhiteLight = Color(0xFFF5FDFD)
+
+val boxRed = Color(0xFFE7AEAE)
+val boxYellow = Color(0xFFEEE07C)
+val boxGreen = Color(0xFF8AFB95)
