@@ -12,11 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -26,7 +22,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -36,13 +31,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.myfridgeapp.R
 import com.example.myfridgeapp.ui.CustomCurvedTopAppBar
+import com.example.myfridgeapp.ui.CustomOutlinedTextField
 import com.example.myfridgeapp.ui.CustomRegisterButton
 import com.example.myfridgeapp.ui.theme.MintBlue
-import com.example.myfridgeapp.ui.theme.MintWhite
-import com.example.myfridgeapp.ui.theme.fontMint
 import com.google.firebase.auth.FirebaseAuth
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FoodRegisterScreen(navController: NavController) {
     val currentUser = FirebaseAuth.getInstance().currentUser
@@ -95,94 +88,48 @@ fun FoodRegisterScreen(navController: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.size(24.dp))
-            Image(
-                painter = painterResource(id = R.drawable.register_in_fridge),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(100.dp)
-            )
-            Spacer(modifier = Modifier.size(48.dp))
+            Column(
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.register_in_fridge),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(100.dp)
+                )
+                Spacer(modifier = Modifier.size(32.dp))
+                CustomOutlinedTextField(
+                    value = name,
+                    onValueChange = { name = it },
+                    label = stringResource(id = R.string.whatsName)
+                )
+                Spacer(modifier = Modifier.size(32.dp))
+                CustomOutlinedTextField(
+                    value = expDate,
+                    onValueChange = { expDate = it },
+                    label = stringResource(id = R.string.checkExpDate)
+                )
+                Spacer(modifier = Modifier.size(32.dp))
+                CustomOutlinedTextField(
+                    value = place,
+                    onValueChange = { place = it },
+                    label = stringResource(id = R.string.wheresPlace)
+                )
+                Spacer(modifier = Modifier.size(32.dp))
+                CustomOutlinedTextField(
+                    value = price,
+                    onValueChange = { price = it },
+                    label = stringResource(id = R.string.howsPrice)
+                )
+                Spacer(modifier = Modifier.size(32.dp))
+                CustomRegisterButton(
+                    text = stringResource(id = R.string.register),
+                    onClick = { viewModel.addFood(userEmail, name, expDate, place, price) },
+                    enabled = true
+                )
 
-            TextField(
-                value = name,
-                onValueChange = { name = it },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .clip(RoundedCornerShape(20.dp)),
-                label = { Text(text = stringResource(id = R.string.whatsName)) },
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    containerColor = MintWhite,
-                    disabledBorderColor = Color.Transparent,
-                    focusedBorderColor = Color.Transparent,
-                    unfocusedBorderColor = Color.Transparent,
-                    unfocusedLabelColor = fontMint,
-                    focusedLabelColor = fontMint
-                )
-            )
-            Spacer(modifier = Modifier.size(32.dp))
-            TextField(
-                value = expDate,
-                onValueChange = { expDate = it },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .clip(RoundedCornerShape(20.dp)),
-                label = { Text(text = stringResource(id = R.string.checkExpDate)) },
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    containerColor = MintWhite,
-                    disabledBorderColor = Color.Transparent,
-                    focusedBorderColor = Color.Transparent,
-                    unfocusedBorderColor = Color.Transparent,
-                    unfocusedLabelColor = fontMint,
-                    focusedLabelColor = fontMint
-                )
-            )
-            Spacer(modifier = Modifier.size(32.dp))
-            TextField(
-                value = place,
-                onValueChange = { place = it },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .clip(RoundedCornerShape(20.dp)),
-                label = { Text(text = stringResource(id = R.string.wheresPlace)) },
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    containerColor = MintWhite,
-                    disabledBorderColor = Color.Transparent,
-                    focusedBorderColor = Color.Transparent,
-                    unfocusedBorderColor = Color.Transparent,
-                    unfocusedLabelColor = fontMint,
-                    focusedLabelColor = fontMint
-                )
-            )
-            Spacer(modifier = Modifier.size(32.dp))
-            TextField(
-                value = price,
-                onValueChange = { price = it },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .clip(RoundedCornerShape(20.dp)),
-                label = { Text(text = stringResource(id = R.string.howsPrice)) },
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    containerColor = MintWhite,
-                    disabledBorderColor = Color.Transparent,
-                    focusedBorderColor = Color.Transparent,
-                    unfocusedBorderColor = Color.Transparent,
-                    unfocusedLabelColor = fontMint,
-                    focusedLabelColor = fontMint
-                )
-            )
-            Spacer(modifier = Modifier.size(32.dp))
-            CustomRegisterButton(
-                text = "등록하기",
-                onClick = { viewModel.addFood(userEmail, name, expDate, place, price) },
-                enabled = true,
-            )
-
+            }
         }
     }
 }

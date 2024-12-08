@@ -47,7 +47,7 @@ fun CustomOutlinedTextField(
             .fillMaxWidth()
             .clip(RoundedCornerShape(20.dp)),
         label = { Text(text = label) },
-        leadingIcon = if (iconId != null) { // iconId가 null이 아닐 때만 leadingIcon을 추가
+        leadingIcon = if (iconId != null) {
             {
                 Icon(
                     painter = painterResource(id = iconId),
@@ -74,13 +74,13 @@ fun CustomRegisterButton(
     text: String,
     onClick: () -> Unit,
     enabled: Boolean,
-    modifier: Modifier = Modifier
+    buttonColor: Color = MintBlue,
+    textColor: Color = Color.White
 ) {
     Button(
         onClick = onClick,
-        modifier = modifier
-            .fillMaxWidth(),
-        colors = ButtonDefaults.buttonColors(containerColor = MintBlue),
+        modifier = Modifier.fillMaxWidth(),
+        colors = ButtonDefaults.buttonColors(containerColor = buttonColor),
         shape = RoundedCornerShape(10.dp),
         enabled = enabled
     ) {
@@ -88,12 +88,12 @@ fun CustomRegisterButton(
             painter = painterResource(id = R.drawable.icon_register),
             contentDescription = null,
             modifier = Modifier.size(24.dp),
-            tint = Color.White
+            tint = textColor
         )
         Text(
             text = text,
             fontWeight = FontWeight.ExtraBold,
-            color = Color.White,
+            color = textColor,
             fontSize = 16.sp
         )
     }
