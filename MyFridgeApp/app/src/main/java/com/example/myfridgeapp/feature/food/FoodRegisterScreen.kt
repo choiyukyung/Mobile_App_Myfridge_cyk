@@ -1,10 +1,13 @@
 package com.example.myfridgeapp.feature.food
 
+import android.app.DatePickerDialog
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,6 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -35,6 +39,9 @@ import com.example.myfridgeapp.ui.CustomOutlinedTextField
 import com.example.myfridgeapp.ui.CustomRegisterButton
 import com.example.myfridgeapp.ui.theme.MintBlue
 import com.google.firebase.auth.FirebaseAuth
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 @Composable
 fun FoodRegisterScreen(navController: NavController) {
@@ -47,9 +54,13 @@ fun FoodRegisterScreen(navController: NavController) {
     }
 
     var name by remember { mutableStateOf("") }
-    var expDate by remember { mutableStateOf("") }
     var place by remember { mutableStateOf("") }
     var price by remember { mutableStateOf("") }
+
+    //expDate
+    var expDate by remember { mutableStateOf("") }
+    val calendar = Calendar.getInstance()
+    var showCalendar by remember { mutableStateOf(false) }
 
     //success/fail message
     val uiState = viewModel.state.collectAsState()
@@ -105,11 +116,52 @@ fun FoodRegisterScreen(navController: NavController) {
                     label = stringResource(id = R.string.whatsName)
                 )
                 Spacer(modifier = Modifier.size(32.dp))
-                CustomOutlinedTextField(
-                    value = expDate,
-                    onValueChange = { expDate = it },
-                    label = stringResource(id = R.string.checkExpDate)
-                )
+                Row(
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Button(
+                        onClick = { showCalendar = true },
+                        modifier = Modifier
+                            .size(30.dp),
+                        contentPadding = PaddingValues(0.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.icon_calendar),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(Color.White)
+                        )
+                    }
+                    Spacer(modifier = Modifier.padding(horizontal = 4.dp))
+                    CustomOutlinedTextField(
+                        value = expDate,
+                        onValueChange = { expDate = it },
+                        label = stringResource(id = R.string.checkExpDate)
+                    )
+                }
+                if (showCalendar) {
+                    val datePicker = DatePickerDialog(
+                        context,
+                        { _, year, month, dayOfMonth ->
+                            val formattedDate =
+                                SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                                    .format(Calendar.getInstance().apply {
+                                        set(year, month, dayOfMonth)
+                                    }.time)
+                            expDate = formattedDate
+                            showCalendar = false
+                        },
+                        calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH)
+                    )
+                    datePicker.show()
+                    showCalendar = false //달력 여러번 보여줌
+                }
+
+
                 Spacer(modifier = Modifier.size(32.dp))
                 CustomOutlinedTextField(
                     value = place,
@@ -125,10 +177,13 @@ fun FoodRegisterScreen(navController: NavController) {
                 Spacer(modifier = Modifier.size(32.dp))
                 CustomRegisterButton(
                     text = stringResource(id = R.string.register),
-                    onClick = { viewModel.addFood(userEmail, name, expDate, place, price) },
+                    onClick = {
+                        viewModel.addFood(
+                            userEmail, name, expDate, place, price
+                        )
+                    },
                     enabled = true
                 )
-
             }
         }
     }

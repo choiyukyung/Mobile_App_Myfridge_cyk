@@ -170,7 +170,7 @@ fun FoodListScreen(navController: NavController) {
                                     contentDescription = null
                                 )
                                 Text(
-                                    text = item.expDate + "에 구매하셨습니다.",
+                                    text = "유통기한: " + item.expDate,
                                     color = DeepGreen
                                 )
                             }
