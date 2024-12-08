@@ -1,6 +1,5 @@
 package com.example.myfridgeapp.feature.shop
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -28,7 +27,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -40,7 +38,6 @@ import com.example.myfridgeapp.ui.theme.MintBlue
 import com.example.myfridgeapp.ui.theme.MintWhite
 
 @OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ShopListScreen(navController: NavController) {
 
@@ -87,7 +84,7 @@ fun ShopListScreen(navController: NavController) {
                 contentDescription = null,
                 modifier = Modifier
                     .width(200.dp)
-                    .clickable { }
+                    .clickable { navController.navigate("shopRegister") }
             )
             Spacer(modifier = Modifier.height(16.dp))
             Row(
