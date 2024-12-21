@@ -1,7 +1,10 @@
 ## Myfridge 개발 중 만든 페이지 모음
+team6 완성본 : https://github.com/choiyukyung/Mobile_App_Myfridge
 
-![image](https://github.com/user-attachments/assets/8236ef51-e267-4615-91fc-ad5d294d50f7) | ![image](https://github.com/user-attachments/assets/58ee6aa5-3c0f-4d96-9d1d-e384b4e7b192) | ![image](https://github.com/user-attachments/assets/0ec26b82-f07a-49e2-9fd4-6864b20e3b82) | ![image](https://github.com/user-attachments/assets/4c37dc9c-7da2-4c71-a0f5-610a54c15464)
----|---|---|---|
+해당 레포는 코틀린 앱을 개발하면서 자세한 커밋 기록용이고 완성본이 아님
 
-![image](https://github.com/user-attachments/assets/f6658996-6b83-4e2a-a10c-cc821b44b039) | ![image](https://github.com/user-attachments/assets/a01b00a1-22d5-462f-8278-6181b829ebf2) | ![image](https://github.com/user-attachments/assets/f600cbd7-1952-43fc-949f-fc421bb5a3ed) | ![image](https://github.com/user-attachments/assets/cf615417-7cff-4dd7-b01f-690cc2dfa81d)
----|---|---|---|
+![image](https://github.com/user-attachments/assets/1e91b077-1ba4-4308-aada-4393fc5b535c) | ![image](https://github.com/user-attachments/assets/c4033083-cae8-4547-899e-32e76121d777) | ![image](https://github.com/user-attachments/assets/8c6a76f8-68ac-46bf-a2e1-0ec6acbce9ff) | ![image](https://github.com/user-attachments/assets/56188ee2-63f6-430c-8394-97753dbeefef) | ![image](https://github.com/user-attachments/assets/812c6dad-ffb1-467b-ab83-fb5af2db3a4d)
+---|---|---|---|---|
+
+![image](https://github.com/user-attachments/assets/e775cb41-1b2f-45e3-8b0d-db588f3b2059) | ![image](https://github.com/user-attachments/assets/d99ef9c9-4556-4c7a-9f76-1eba641fe449) | ![image](https://github.com/user-attachments/assets/33526c92-6f0a-4d1c-b64d-19bb1b87076b) | ![image](https://github.com/user-attachments/assets/eb366b24-39ad-4e21-ac4e-7ff3553b6591) | ![image](https://github.com/user-attachments/assets/50288a04-c727-4ce0-b388-40d866099fb1)
+---|---|---|---|---|
